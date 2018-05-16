@@ -36,11 +36,6 @@ public class AdapterActivity extends BaseActivity<AdapterViewModel, ActivityAdap
     }
 
     @Override
-    protected Class<AdapterViewModel> getViewModelClass() {
-        return AdapterViewModel.class;
-    }
-
-    @Override
     protected int getLayoutRes() {
         return R.layout.activity_adapter;
     }

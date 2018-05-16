@@ -1,12 +1,16 @@
 package by.pavlovskii.ilya.mvvm.test.ui.activity.twoway.di;
 
 import android.support.annotation.NonNull;
-import by.mvvmwrapper.dagger.map.ViewModelKey;
-import by.mvvmwrapper.viewmodel.BaseViewModel;
+
+import javax.inject.Provider;
+
+import by.mvvmwrapper.dagger.qualifier.TopLevelDependency;
+import by.mvvmwrapper.dagger.scope.ActivityScope;
+import by.mvvmwrapper.dagger.utils.ViewModelDiUtils;
+import by.pavlovskii.ilya.mvvm.test.ui.activity.twoway.TwoWayActivity;
 import by.pavlovskii.ilya.mvvm.test.ui.activity.twoway.TwoWayViewModel;
-import dagger.Binds;
 import dagger.Module;
-import dagger.multibindings.IntoMap;
+import dagger.Provides;
 
 /**
  * Create with Android Studio<br>
@@ -21,9 +25,11 @@ import dagger.multibindings.IntoMap;
 @Module
 public abstract class TwoWayModule {
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(TwoWayViewModel.class)
-    abstract BaseViewModel bindTwoWayViewModel(@NonNull TwoWayViewModel viewModel);
-
+    @Provides
+    @ActivityScope
+    @TopLevelDependency
+    static TwoWayViewModel provideViewModel(@NonNull TwoWayActivity activity,
+                                            @NonNull Provider<TwoWayViewModel> viewModelProvider) {
+        return ViewModelDiUtils.provideViewModel(activity, TwoWayViewModel.class, viewModelProvider);
+    }
 }

@@ -2,15 +2,17 @@ package by.pavlovskii.ilya.mvvm.test.ui.activity.main.di;
 
 import android.support.annotation.NonNull;
 
-import by.mvvmwrapper.dagger.map.ViewModelKey;
+import javax.inject.Provider;
+
+import by.mvvmwrapper.dagger.qualifier.TopLevelDependency;
 import by.mvvmwrapper.dagger.scope.ActivityScope;
-import by.mvvmwrapper.viewmodel.BaseViewModel;
+import by.mvvmwrapper.dagger.utils.ViewModelDiUtils;
 import by.pavlovskii.ilya.mvvm.test.navigator.MainNavigator;
+import by.pavlovskii.ilya.mvvm.test.ui.activity.main.MainActivity;
 import by.pavlovskii.ilya.mvvm.test.ui.activity.main.MainViewModel;
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
-import dagger.multibindings.IntoMap;
 import ru.terrakok.cicerone.Navigator;
 
 /**
@@ -30,9 +32,11 @@ public abstract class MainActivityModule {
     @ActivityScope
     abstract Navigator navigator(MainNavigator navigator);
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(MainViewModel.class)
-    abstract BaseViewModel bindMainViewModel(@NonNull MainViewModel viewModel);
-
+    @Provides
+    @ActivityScope
+    @TopLevelDependency
+    static MainViewModel provideViewModel(@NonNull MainActivity activity,
+                                          @NonNull Provider<MainViewModel> viewModelProvider) {
+        return ViewModelDiUtils.provideViewModel(activity, MainViewModel.class, viewModelProvider);
+    }
 }

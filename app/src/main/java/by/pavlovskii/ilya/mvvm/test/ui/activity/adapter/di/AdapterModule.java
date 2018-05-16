@@ -2,15 +2,20 @@ package by.pavlovskii.ilya.mvvm.test.ui.activity.adapter.di;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import by.mvvmwrapper.dagger.map.ViewModelKey;
-import by.mvvmwrapper.viewmodel.BaseViewModel;
+
+import javax.inject.Provider;
+
+import by.mvvmwrapper.dagger.qualifier.TopLevelDependency;
+import by.mvvmwrapper.dagger.scope.ActivityScope;
+import by.mvvmwrapper.dagger.utils.ViewModelDiUtils;
+import by.pavlovskii.ilya.mvvm.test.ui.activity.adapter.AdapterActivity;
 import by.pavlovskii.ilya.mvvm.test.ui.activity.adapter.AdapterViewModel;
 import by.pavlovskii.ilya.mvvm.test.ui.activity.adapter.impl.ColorsFactoryImpl;
 import by.pavlovskii.ilya.mvvm.test.ui.adapters.ColorAdapter;
 import by.pavlovskii.ilya.mvvm.test.utils.factory.ColorsFactory;
 import dagger.Binds;
 import dagger.Module;
-import dagger.multibindings.IntoMap;
+import dagger.Provides;
 
 /**
  * Create with Android Studio<br>
@@ -31,8 +36,11 @@ public abstract class AdapterModule {
     @Binds
     abstract ColorsFactory bindColorsFactory(@NonNull ColorsFactoryImpl impl);
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(AdapterViewModel.class)
-    abstract BaseViewModel bindAdapterViewModel(@NonNull AdapterViewModel viewModel);
+    @Provides
+    @ActivityScope
+    @TopLevelDependency
+    static AdapterViewModel provideViewModel(@NonNull AdapterActivity activity,
+                                             @NonNull Provider<AdapterViewModel> viewModelProvider) {
+        return ViewModelDiUtils.provideViewModel(activity, AdapterViewModel.class, viewModelProvider);
+    }
 }

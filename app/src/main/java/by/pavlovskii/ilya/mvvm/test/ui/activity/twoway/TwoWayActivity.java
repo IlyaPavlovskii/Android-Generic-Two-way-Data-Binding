@@ -21,8 +21,4 @@ public class TwoWayActivity extends BaseActivity<TwoWayViewModel, ActivityTwoWay
         return R.layout.activity_two_way;
     }
 
-    @Override
-    protected Class<TwoWayViewModel> getViewModelClass() {
-        return TwoWayViewModel.class;
-    }
 }
