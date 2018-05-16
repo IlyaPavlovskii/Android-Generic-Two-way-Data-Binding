@@ -5,18 +5,14 @@ import android.support.annotation.NonNull;
 import javax.inject.Named;
 import javax.inject.Provider;
 
-import by.mvvmwrapper.dagger.map.ViewModelKey;
 import by.mvvmwrapper.dagger.qualifier.TopLevelDependency;
 import by.mvvmwrapper.dagger.scope.FragmentScope;
 import by.mvvmwrapper.dagger.utils.ViewModelDiUtils;
-import by.mvvmwrapper.viewmodel.BaseViewModel;
 import by.pavlovskii.ilya.mvvm.test.storage.Constants;
 import by.pavlovskii.ilya.mvvm.test.ui.fragments.timer.TimerFragment;
 import by.pavlovskii.ilya.mvvm.test.ui.fragments.timer.TimerViewModel;
-import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
-import dagger.multibindings.IntoMap;
 
 /**
  * Create with Android Studio<br>
@@ -36,11 +32,6 @@ public abstract class TimerViewModelModule {
     static String provideTag(@NonNull TimerFragment fragment) {
         return fragment.getTag();
     }
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(TimerViewModel.class)
-    abstract BaseViewModel bindTimerViewModel(@NonNull TimerViewModel viewModel);
 
     @Provides
     @FragmentScope

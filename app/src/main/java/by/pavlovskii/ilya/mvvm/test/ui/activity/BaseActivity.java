@@ -113,6 +113,4 @@ public abstract class BaseActivity<T extends BaseViewModel, B extends ViewDataBi
         return null;
     }
 
-    protected abstract Class<T> getViewModelClass();
-
 }

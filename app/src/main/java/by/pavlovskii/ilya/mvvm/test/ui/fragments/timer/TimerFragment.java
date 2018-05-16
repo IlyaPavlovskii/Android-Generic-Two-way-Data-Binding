@@ -46,9 +46,4 @@ public class TimerFragment extends BaseFragment<TimerViewModel, FragmentTimerBin
         return R.layout.fragment_timer;
     }
 
-    @Override
-    protected Class<TimerViewModel> getViewModelClass() {
-        return TimerViewModel.class;
-    }
-
 }

@@ -29,9 +29,4 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
         return R.layout.activity_main;
     }
 
-    @Override
-    protected Class<MainViewModel> getViewModelClass() {
-        return MainViewModel.class;
-    }
-
 }

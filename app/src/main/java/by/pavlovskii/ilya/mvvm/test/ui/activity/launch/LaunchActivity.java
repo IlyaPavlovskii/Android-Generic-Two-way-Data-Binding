@@ -34,11 +34,6 @@ public class LaunchActivity extends BaseActivity<LaunchViewModel, ActivityLaunch
     }
 
     @Override
-    protected Class<LaunchViewModel> getViewModelClass() {
-        return LaunchViewModel.class;
-    }
-
-    @Override
     protected int getLayoutRes() {
         return R.layout.activity_launch;
     }

@@ -25,7 +25,6 @@ import dagger.android.support.AndroidSupportInjectionModule;
         AndroidSupportInjectionModule.class,
         AppModule.class,
         RouterModule.class,
-        ViewModelModule.class,
 
         DaggerBindingModule.class,
 
